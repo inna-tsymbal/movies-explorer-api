@@ -30,7 +30,7 @@ const movieSchema = new mongoose.Schema({
       message: 'Некорректный URL',
     },
   },
-  trailer: {
+  trailerLink: {
     type: String,
     required: true,
     validate: {
@@ -50,7 +50,6 @@ const movieSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
     required: true,
-    select: false,
   },
   movieId: {
     type: Number,

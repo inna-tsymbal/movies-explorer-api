@@ -17,6 +17,11 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
+module.exports.logout = (_req, res) => {
+  res.clearCookie('jwt');
+  res.status(200).send({ message: 'Вы вышли из аккаунта' });
+};
+
 module.exports.getUser = (req, res, next) => {
   User.findById(req.user._id)
     .orFail(new NotFoundError('Пользователь по указанному id не найден'))
@@ -60,6 +65,9 @@ module.exports.updateUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(new BadRequestError('Переданы некорректные данные'));
+      }
+      if (err.code === 11000) {
+        return next(new ConflictError('Пользователь с таким email уже зарегистрирован'));
       }
       if (err.name === 'CastError') {
         return next(new BadRequestError('Передан некорректный id пользователя'));
