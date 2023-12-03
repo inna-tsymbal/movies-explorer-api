@@ -17,11 +17,6 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.logout = (_req, res) => {
-  res.clearCookie('jwt');
-  res.status(200).send({ message: 'Вы вышли из аккаунта' });
-};
-
 module.exports.getUser = (req, res, next) => {
   User.findById(req.user._id)
     .orFail(new NotFoundError('Пользователь по указанному id не найден'))

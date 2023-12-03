@@ -4,6 +4,7 @@
       "es2021": true
   },
   "extends": "airbnb-base",
+  "no-console":0,
   "parserOptions": {
       "ecmaVersion": "latest"
   },
