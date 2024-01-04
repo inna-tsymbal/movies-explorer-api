@@ -4,7 +4,7 @@
 
 # Ссылка на проект
 
-IP 62.84.126.127
+IP 84.201.156.5
 
 Backend https://api.diplom.innatsymbal.nomoredomainsmonster.ru
 
