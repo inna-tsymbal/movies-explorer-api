@@ -5,7 +5,7 @@ const NotFoundError = require('../errors/NotFoundError');
 const ForbiddenError = require('../errors/ForbiddenError');
 
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({ owner: req.user._id })
     .then((movies) => res.status(200).send(movies))
     .catch(next);
 };
@@ -51,7 +51,8 @@ module.exports.createMovie = (req, res, next) => {
 };
 
 module.exports.deleteMovie = (req, res, next) => {
-  Movie.findById(req.params.movieId)
+  const { _id } = req.params;
+  Movie.findById(_id)
     .orFail(new NotFoundError('Карточка с указанным id не найдена'))
     .then((movie) => {
       if (movie.owner.equals(req.user._id)) {
