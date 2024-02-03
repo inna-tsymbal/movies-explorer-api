@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema(
       required: true,
       minlength: 2,
       maxlength: 30,
-      default: 'Инна',
     },
     email: {
       type: String,
@@ -18,7 +17,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       validate: {
         validator: (v) => validator.isEmail(v),
-        message: 'Некорректный URL',
+        message: 'Введите корректный Email',
       },
     },
     password: {
